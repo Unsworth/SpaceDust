@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 		void Update ()
 		{
 				
-
+		//Debug.Log (pickupDistance);
 				transform.position = Vector3.Lerp (transform.position, newPosition, 0.25f);
 				
 				//Grabbing touch screen input
@@ -170,10 +170,13 @@ public class PlayerController : MonoBehaviour
 				}
 		}
 
+
+
 		public void SetHit (bool _hit)
 		{
 				hit = _hit;
 		}
+		
 
 		IEnumerator CannotBeHit ()
 		{
