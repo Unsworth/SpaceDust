@@ -19,7 +19,6 @@ public class Dust : Collectable {
 	// Update is called once per frame
 	void Update () {
 		base.Update ();
-		rigidbody2D.velocity = new Vector2 (GameStats.instance.GetCurrentSpeed () * -1, 0);
 		transform.Rotate (0.0f, 0.0f, 10.0f * Time.deltaTime);
 	}
 

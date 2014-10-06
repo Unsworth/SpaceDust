@@ -6,7 +6,6 @@ public class PowerUp : Collectable {
 	// Use this for initialization
 	void Start () {
 		base.Start();
-		rigidbody2D.velocity = new Vector2 (-4, 0);
 
 	}
 

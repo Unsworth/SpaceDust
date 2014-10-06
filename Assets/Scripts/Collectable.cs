@@ -20,11 +20,14 @@ public class Collectable : MonoBehaviour
 		// Update is called once per frame
 		protected virtual void Update ()
 		{				
-				distance = Vector3.Distance (this.transform.position, playerTransform.position);				
+				distance = Vector3.Distance (this.transform.position, playerTransform.position);
+				if (!triggered) {
+						rigidbody2D.velocity = new Vector2 (GameStats.instance.GetCurrentSpeed () * -1, 0);
+				}
 				ProximityPickup ();	
 		}
 
-		protected virtual void PickedUp()
+		protected virtual void PickedUp ()
 		{				
 				Destroy (gameObject);
 		}
@@ -32,7 +35,7 @@ public class Collectable : MonoBehaviour
 		void ProximityPickup ()
 		{
 
-				if (distance < GameStats.instance.GetPickupDistance() && !triggered) {
+				if (distance < GameStats.instance.GetPickupDistance () && !triggered) {
 						position = transform.position;
 						triggered = true;
 				}
@@ -41,7 +44,7 @@ public class Collectable : MonoBehaviour
 						transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (0.1f, 0.1f, 0.1f), 0.05f);
 						collectSpeed += Time.deltaTime;
 						if (distance < 0.1f) {
-								PickedUp();
+								PickedUp ();
 						}
 
 				}
