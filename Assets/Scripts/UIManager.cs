@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour {
 
 	protected Rect scoreArea = new Rect(0,0,Screen.width/5, Screen.height/10);
 
+	private GUIStyle gStyle;
+	public Font scoreFont;
+	public GUIText scoreText;
 
 	void Awake()
 	{
@@ -22,7 +25,9 @@ public class UIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		gStyle = new GUIStyle ();
+		gStyle.font = scoreFont;
+
 	}
 	
 	// Update is called once per frame
@@ -33,7 +38,8 @@ public class UIManager : MonoBehaviour {
 
 	void OnGUI(){
 		AutoResize(1024, 600);
-		GUI.Label(scoreArea, "Score: " + currentScore.ToString());
+		//GUI.Label(scoreArea, "Score: " + currentScore.ToString(), gStyle);
+		scoreText.text = "Score: " + currentScore.ToString ();
 	}
 
 	public void SetScore(int points)

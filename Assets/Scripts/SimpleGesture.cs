@@ -46,7 +46,7 @@ public class SimpleGesture : MonoBehaviour {
 	private Vector2 touchEndWorld;
 	private Vector2 touchMovedWorld;
 	private float swipeDistance;
-	private float minSwipeDistance = 1.0f;
+	private float minSwipeDistance = 10.0f;
 	private InputData currentInput;
 	private InputData tempInput;
 

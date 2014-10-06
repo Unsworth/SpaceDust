@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-
+		public GameObject mineBullet;
 		public static PlayerController player;
 		SpriteEffects spriteEffects;
 		float screenMiddleWidth = Screen.width / 2;
@@ -18,15 +18,17 @@ public class PlayerController : MonoBehaviour
 		Vector3 currentPosition;
 		Vector3 newPosition;
 		bool hit;
+		bool canShoot; 
+		public float timeBetweenShot;
 
-		void Awake()
-	{
-		if (player != null)
-			GameObject.Destroy (player);
+		void Awake ()
+		{
+				if (player != null)
+						GameObject.Destroy (player);
 				else
-			player = this;
+						player = this;
 		
-		DontDestroyOnLoad (player);
+				DontDestroyOnLoad (player);
 		}
 
 
@@ -38,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
 				currentPosition = transform.position;
 				newPosition = currentPosition;
+
+				canShoot = true;
 		}
 	
 		// Update is called once per frame
@@ -63,6 +67,10 @@ public class PlayerController : MonoBehaviour
 				}
 				if (Input.GetKeyDown (KeyCode.S)) {
 						Move (-2);
+				}
+
+				if (Input.GetKeyDown (KeyCode.Space)) {
+						Fire ();
 				}
 
 				MoveAlongX (Time.deltaTime);
@@ -93,7 +101,7 @@ public class PlayerController : MonoBehaviour
 						}
 				}
 				//right side input controls
-				if (input.CurrentTouchPoint.x < screenMiddleWidth) {
+				if (input.CurrentTouchPoint.x > screenMiddleWidth) {
 						switch (input.InputState) {
 				
 						case InputState.Tap:
@@ -122,9 +130,9 @@ public class PlayerController : MonoBehaviour
 				newPosition = new Vector3 (newPosition.x, newY, 0);
 		}
 
-		void MoveAlongX(float direction)
+		void MoveAlongX (float direction)
 		{
-		if (!hit) {
+				if (!hit) {
 						newX = transform.position.x + (direction * 0.5f);
 						if (newX > maxX) {
 								newX = maxX;
@@ -133,16 +141,28 @@ public class PlayerController : MonoBehaviour
 						}
 						newPosition = new Vector3 (newX, newPosition.y, 0);
 				}
-			}
+		}
 
 		void Fire ()
 		{
-				Debug.Log ("Pew");
+				if (canShoot) {
+						Debug.Log ("Pew");
+						GameObject mineClone = Instantiate (mineBullet, new Vector3 (this.transform.position.x + 0.5f, this.transform.position.y), Quaternion.identity) as GameObject;
+						canShoot = false;
+						StartCoroutine (CannotShoot ());
+				}
 		}
 
+		IEnumerator CannotShoot ()
+		{
+				yield return new WaitForSeconds (timeBetweenShot);
+				canShoot = true;
+		}
+
+		
 		public void Collision ()
 		{
-		if (!hit) {
+				if (!hit) {
 						spriteEffects.StartFlicker ();
 						MoveAlongX (-1);
 						SetHit (true);
@@ -150,17 +170,17 @@ public class PlayerController : MonoBehaviour
 				}
 		}
 
-		public void SetHit(bool _hit)
+		public void SetHit (bool _hit)
 		{
 				hit = _hit;
 		}
 
 		IEnumerator CannotBeHit ()
 		{
-			GetComponent<Collider2D> ().enabled = false;
-			yield return new WaitForSeconds (0.5f);
-			GetComponent<Collider2D> ().enabled = true;
-			SetHit (false);
+				GetComponent<Collider2D> ().enabled = false;
+				yield return new WaitForSeconds (0.5f);
+				GetComponent<Collider2D> ().enabled = true;
+				SetHit (false);
 		}
 
 }
