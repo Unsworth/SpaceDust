@@ -21,8 +21,10 @@ public class PowerUp : Collectable {
 	{
 		UIManager.instance.SetScore (25);
 		Debug.Log ("Yes");
-		GameStats.instance.SetPickupDistance (7.5f);
-		GameStats.instance.SetValueInTime ("PickupDistance", 20.0f, 1.5f);
+		GameStats.instance.SetCurrentSpeed (12);
+		GameStats.instance.SetValueInTime ("CurrentSpeed", 10, 6);
+		//GameStats.instance.SetPickupDistance (7.5f);
+		//GameStats.instance.SetValueInTime ("PickupDistance", 20.0f, 1.5f);
 		base.PickedUp ();
 	}
 	

@@ -11,6 +11,8 @@ public class RockAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		rigidbody2D.velocity = new Vector2 (GameStats.instance.GetCurrentSpeed () * -1, 0);
 		if(transform.position.x < -10)
 		{
 			UIManager.instance.SetScore(10);
