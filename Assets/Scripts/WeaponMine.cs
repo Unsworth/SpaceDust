@@ -31,6 +31,9 @@ public class WeaponMine : MonoBehaviour
 		if (other.tag == "Enemy") {
 			Destroy(gameObject);
 			Destroy(other.gameObject);
-		}			
+		}	
+		if (other.tag == "Boss01") {
+			other.GetComponent<Boss01>().TakeDamage(1);
+				}
 	}
 }
