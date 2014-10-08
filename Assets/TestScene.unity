@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedModifier: .100000001
   scoreModifier: 100
-  shotCooldown: 1
+  shotCooldown: 2
   bullet: {fileID: 100000, guid: b1452f60f64d849df8479de23d694d2a, type: 2}
 --- !u!58 &1074384380
 CircleCollider2D:
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1108680942}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ab429342c944d22bdc9c42b83eeadf, type: 3}
   m_Name: 
@@ -390,6 +390,10 @@ MonoBehaviour:
   hardRock: {fileID: 100000, guid: ce86bcc7cb88c4645b91a2908c218707, type: 2}
   dust: {fileID: 100000, guid: cc9ec073f3c6b43c3a0ddd1e2afcfa99, type: 2}
   breakableRock: {fileID: 100000, guid: 519880bbdb80d4068b95ae6935133d86, type: 2}
+  enemySimple: {fileID: 100000, guid: 0c8e65699cbd0444d93faac39338f4fc, type: 2}
+  enemyDirectShot: {fileID: 100000, guid: 98dead2fa68af4b34bf5b9cc670808a2, type: 2}
+  enemyLaneJumper: {fileID: 100000, guid: 9621f4577c7344361ae059232d0a3e4c, type: 2}
+  enemyMultiShot: {fileID: 100000, guid: 4a94944036c8645dbbe242f7469ab877, type: 2}
 --- !u!114 &1108680949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +470,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 4a94944036c8645dbbe242f7469ab877, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a94944036c8645dbbe242f7469ab877, type: 2}
@@ -768,7 +772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1780252566
 MonoBehaviour:
   m_ObjectHideFlags: 0

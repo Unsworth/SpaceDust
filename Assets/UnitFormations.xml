@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<formation>
 		<size>8</size>
+		<spawnTime>4</spawnTime>
 		<object>
 			<type>HardRock</type>
 			<x>0</x>
@@ -30,6 +31,7 @@
 	</formation>
 	<formation>
 		<size>8</size>
+		<spawnTime>4</spawnTime>
 		<object>
 			<type>HardRock</type>
 			<x>0</x>
@@ -59,6 +61,7 @@
 	</formation>
 	<formation>
 		<size>8</size>
+		<spawnTime>4</spawnTime>
 		<object>
 			<type>HardRock</type>
 			<x>0</x>
@@ -88,6 +91,7 @@
 	</formation>
 	<formation>
 		<size>15</size>
+		<spawnTime>4</spawnTime>
 		<object>
 			<type>HardRock</type>
 			<x>0</x>
@@ -138,6 +142,7 @@
 	</formation>
 	<formation>
 		<size>14</size>
+		<spawnTime>4</spawnTime>
 		<object>
 			<type>HardRock</type>
 			<x>10</x>
@@ -181,5 +186,17 @@
 			<type>Dust</type>
 			<x>10</x>
 			<y>-2</y>
+		</object>
+	</formation>
+	<formation>
+		<size>2</size>
+		<spawnTime>8</spawnTime>
+		<object>
+			<type>EnemySimple</type>
+			<x>2</x>
+			<y>4</y>
+			<type>EnemySimple</type>
+			<x>2</x>
+			<y>-4</y>
 		</object>
 	</formation>

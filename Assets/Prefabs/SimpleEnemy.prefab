@@ -68,9 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e923e83af4e054e6496955777e42b146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedModifier: 1
+  speedModifier: .300000012
   scoreModifier: 100
-  shotCooldown: 1
+  shotCooldown: 2
   bullet: {fileID: 100000, guid: b1452f60f64d849df8479de23d694d2a, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
