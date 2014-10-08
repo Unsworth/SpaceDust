@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour {
 
 	public float speedModifier = 1;
 	public int scoreModifier;
-	float currentSpeed;
+	protected float currentSpeed;
 	// Use this for initialization
 	void Start () {
 		currentSpeed = GameStats.instance.GetCurrentSpeed ();

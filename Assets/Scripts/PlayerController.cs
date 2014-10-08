@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 		bool hit;
 		bool canShoot; 
 		public float timeBetweenShot;
+		float[] lanePositions = new float[5]{-4.0f, -2.0f, 0.0f, 2.0f, 4.0f};
+		int arrayPosition = 2;
 
 		void Awake ()
 		{
@@ -54,19 +56,11 @@ public class PlayerController : MonoBehaviour
 				//Grabbing touch screen input
 				HandleInput (SimpleGesture.instance.GetGesture ());
 
-				if (SimpleGesture.instance.GetGesture ().InputState == InputState.SwipeUp) {
-						Move (2);
-				}
-				if (SimpleGesture.instance.GetGesture ().InputState == InputState.SwipeDown) {
-						Move (-2);
-				}
-
-
 				if (Input.GetKeyDown (KeyCode.W)) {
-						Move (2);
+						Move (1);
 				}
 				if (Input.GetKeyDown (KeyCode.S)) {
-						Move (-2);
+						Move (-1);
 				}
 
 				if (Input.GetKeyDown (KeyCode.Space)) {
@@ -86,12 +80,12 @@ public class PlayerController : MonoBehaviour
 
 						case InputState.SwipeUp:
 								{
-										Move (2);
+										Move (1);
 										break;
 								}
 						case InputState.SwipeDown:
 								{
-										Move (-2);
+										Move (-1);
 										break;
 								}
 						default:
@@ -120,14 +114,14 @@ public class PlayerController : MonoBehaviour
 
 		void Move (float direction)
 		{
-				newY = transform.position.y + direction;
-				if (newY > maxY) {
-						newY = maxY;
-				} else if (newY < minY) {
-						newY = minY;
+				newY = arrayPosition + direction;
+				if (newY > lanePositions.Length - 1) {
+						newY = lanePositions.Length - 1;
+				} else if (newY < 0) {
+						newY = 0;
 				}
-
-				newPosition = new Vector3 (newPosition.x, newY, 0);
+				arrayPosition = (int)newY;
+				newPosition = new Vector3 (newPosition.x, lanePositions[arrayPosition], 0);
 		}
 
 		void MoveAlongX (float direction)
