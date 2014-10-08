@@ -19,7 +19,8 @@ public class EnemyLaneJumper : Enemy
 	void Update ()
 	{
 		base.Update ();
-		transform.position = Vector3.Lerp (transform.position, newPosition, 0.25f);
+		transform.position = new Vector3 (transform.position.x, Mathf.Lerp (transform.position.y, newPosition.y, 0.25f), 0);
+			
 		if (currentTime + moveCooldown <= Time.time) {
 			float absY = Mathf.Abs (player.rigidbody2D.position.y - rigidbody2D.position.y);
 			if (absY > 1.75f) {

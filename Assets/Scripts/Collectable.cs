@@ -10,11 +10,14 @@ public class Collectable : MonoBehaviour
 		float collectSpeed = 0.01f;
 		Vector3 position;
 		Vector3 scale;
+		float currentSpeed;
 
 		// Use this for initialization
 		protected virtual void Start ()
 		{
 				playerTransform = PlayerController.player.transform;
+				currentSpeed = GameStats.instance.GetCurrentSpeed ();
+				rigidbody2D.velocity = new Vector2 (GameStats.instance.GetCurrentSpeed () * -1, 0);
 		}
 	
 		// Update is called once per frame
@@ -22,7 +25,11 @@ public class Collectable : MonoBehaviour
 		{				
 				distance = Vector3.Distance (this.transform.position, playerTransform.position);
 				if (!triggered) {
+					if (currentSpeed != GameStats.instance.GetCurrentSpeed ())
+			{
 						rigidbody2D.velocity = new Vector2 (GameStats.instance.GetCurrentSpeed () * -1, 0);
+						currentSpeed = GameStats.instance.GetCurrentSpeed ();
+			}
 				}
 				ProximityPickup ();	
 		}
