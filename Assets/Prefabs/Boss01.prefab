@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6100000}
   m_Layer: 0
   m_Name: Boss01
-  m_TagString: Untagged
+  m_TagString: Boss01
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3dc80d27e79242b29fe9853b239bea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthMax: 0
-  healthCurrent: 0
+  healthMax: 10
+  healthCurrent: 10
   speed: 0
   attackRate: 2
   attackTime: 0

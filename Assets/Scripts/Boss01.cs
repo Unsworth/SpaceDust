@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// Boss01. Idea #78: LaneJumper boss: Lure it into rocks to damage it
+/// </summary>
 public class Boss01 : MonoBehaviour
 {
 
@@ -50,7 +54,7 @@ public class Boss01 : MonoBehaviour
 								if (Mathf.Abs (Vector3.Distance (transform.position, attackPosition)) < 0.1f) {
 										transform.position = attackPosition;
 										attackTime = Time.time + attackRate;
-										mode = AttackMode.regular;
+										mode = AttackMode.wave;
 								}
 								break;
 						}

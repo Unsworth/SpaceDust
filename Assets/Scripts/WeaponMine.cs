@@ -10,6 +10,8 @@ public class WeaponMine : MonoBehaviour
 	void Start ()
 	{
 		Physics2D.IgnoreLayerCollision (8, 9, true);
+		if (GameStats.instance.GetBossMode ())
+						mineSpeed *= -1;
 		rigidbody2D.velocity = new Vector2 (mineSpeed, 0);
 	}
 
@@ -33,6 +35,7 @@ public class WeaponMine : MonoBehaviour
 			Destroy(other.gameObject);
 		}	
 		if (other.tag == "Boss01") {
+			Destroy(gameObject);
 			other.GetComponent<Boss01>().TakeDamage(1);
 				}
 	}
