@@ -39,6 +39,7 @@ public class ObjectSpawner : MonoBehaviour
 	float spawnTime;
 	List<RockFormation> rockFormations;
 	List<ObjectFormation> objectFormations;
+	ObjectFormation randomFormation;
 	List<GameObject> objects;
 	public GameObject hardRock;
 	public GameObject dust;
@@ -50,6 +51,7 @@ public class ObjectSpawner : MonoBehaviour
 	int formationNumber = 0;
 	int formationSize = 0;
 	int formationCount = 0;
+	float[] lanePositions = new float[5]{-4.0f, -2.0f, 0.0f, 2.0f, 4.0f};
 	// Use this for initialization
 	void Start ()
 	{
@@ -57,6 +59,7 @@ public class ObjectSpawner : MonoBehaviour
 		spawnTime = Time.time + 3.0f;
 		rockFormations = new List<RockFormation> ();
 		objectFormations = new List<ObjectFormation> ();
+		randomFormation = new ObjectFormation ();
 		objects = new List<GameObject> ();
 		objects.Add (hardRock);
 		objects.Add (breakableRock);
@@ -174,6 +177,21 @@ public class ObjectSpawner : MonoBehaviour
 		float random = Random.Range (-2, 2);
 		random *= 2;
 
+
+		if(Time.time > spawnTime)
+		{
+			randomFormation = Random3Line (Random.Range (2, 5), Random.Range(1, 3));
+			for(int i = 0; i < randomFormation.positions.Length; i++)
+			{
+				GameObject clone = Instantiate(objects[(int)randomFormation.objectType[i]], new Vector3(12 + randomFormation.positions[i].x, randomFormation.positions[i].y, 0), Quaternion.identity) as GameObject;
+				clone.rigidbody2D.velocity = new Vector2(-6, 0);
+			}
+
+			spawnTime = Time.time + randomFormation.spawnTime;
+
+		}
+
+		/*
 		if (Time.time > spawnTime) {
 
 			for (int j = 0; j < objectFormations[formationNumber].positions.Length; j++) {
@@ -186,6 +204,40 @@ public class ObjectSpawner : MonoBehaviour
 			formationNumber++;
 			formationNumber %= objectFormations.Count;
 		}
+		*/
+	}
 
+
+	ObjectFormation Random3Line(int items, float spnTme)
+	{
+		ObjectFormation temp1 = new ObjectFormation();
+		temp1.positions = new Vector2 [items];
+		temp1.objectType = new ObjectType[items];
+		List<float> cannotGo = new List<float>();
+		bool lockOut = false;
+
+		foreach (float pos in lanePositions)
+		{
+			cannotGo.Add(pos);
+		}
+
+		for(int i = 0; i < items; i++)
+		{
+			int tempInt = Random.Range (1, 201);
+			Debug.Log (tempInt);
+			if(tempInt < 10 && !lockOut)
+			{
+				temp1.objectType[i] = ObjectType.EnemySimple;
+				lockOut = true;
+			}else{
+				temp1.objectType[i] = (ObjectType)Random.Range (0,3);
+			}
+			int temp = Random.Range(0, cannotGo.Count);
+			temp1.positions[i].y = cannotGo[temp];
+			temp1.positions[i].x = Random.Range (1, 7);
+			cannotGo.RemoveAt(temp);
+		}
+		temp1.spawnTime = spnTme;
+		return temp1;
 	}
 }

@@ -22,8 +22,6 @@ public class EnemyLaneJumper : Enemy
 	{
 		base.Update ();
 		transform.position = new Vector3 (transform.position.x, Mathf.Lerp (transform.position.y, newPosition.y, 0.1f), 0);
-		Debug.Log ("Pos: " + transform.position);
-		Debug.Log ("Screen: " + GameStats.instance.GetHalfScreenWidth ());
 		if(transform.position.x > Camera.main.transform.position.x)
 		{
 			if (currentTime + moveCooldown <= Time.time) {
