@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Xml;
 
 public class UIManager : MonoBehaviour {
 
@@ -12,7 +13,9 @@ public class UIManager : MonoBehaviour {
 	private GUIStyle gStyle;
 	public Font scoreFont;
 	public GUIText scoreText;
-
+	TextAsset textAsset;
+	public float defaultScreenHeight = 1080.0f;
+	public float defaultFontSize = 500.0f;
 	void Awake()
 	{
 		if(instance != null)
@@ -21,13 +24,17 @@ public class UIManager : MonoBehaviour {
 			instance = this;
 		
 		DontDestroyOnLoad(instance);
+		Debug.Log (Screen.height);
+		Debug.Log (defaultScreenHeight);
+		Debug.Log (defaultFontSize);
+		Debug.Log (Screen.height / defaultScreenHeight * defaultFontSize);
+		scoreText.fontSize = (int)(Screen.height / defaultScreenHeight * defaultFontSize);
 	}
 
 	// Use this for initialization
 	void Start () {
 		gStyle = new GUIStyle ();
 		gStyle.font = scoreFont;
-
 	}
 	
 	// Update is called once per frame
@@ -40,13 +47,14 @@ public class UIManager : MonoBehaviour {
 		AutoResize(1024, 600);
 		//GUI.Label(scoreArea, "Score: " + currentScore.ToString(), gStyle);
 		scoreText.text = "Score: " + currentScore.ToString ();
+		//scoreText.text = textAsset.text;
 	}
 
 	public void SetScore(int points)
 	{
 		currentScore += points;
 		if (currentScore < 0)
-						currentScore = 0;
+			currentScore = 0;
 	}
 
 	public static void AutoResize(int screenWidth, int screenHeight)

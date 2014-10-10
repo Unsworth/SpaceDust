@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 
 public class RockFormation
 {
@@ -48,9 +49,14 @@ public class ObjectSpawner : MonoBehaviour
 	public GameObject enemyDirectShot;
 	public GameObject enemyLaneJumper;
 	public GameObject enemyMultiShot;
+	public GameObject boss01;
+	public TextAsset fileName;
+	private int currentCount = 0;
+	private int totalCount = 5;
 	int formationNumber = 0;
 	int formationSize = 0;
 	int formationCount = 0;
+	public float randomTime = 20.0f;
 	float[] lanePositions = new float[5]{-4.0f, -2.0f, 0.0f, 2.0f, 4.0f};
 	// Use this for initialization
 	void Start ()
@@ -69,10 +75,11 @@ public class ObjectSpawner : MonoBehaviour
 		objects.Add (enemyLaneJumper);
 		objects.Add (enemyMultiShot);
 
+		///How to load in a document from the Resources Folder
+		TextAsset textAsset = (TextAsset)Resources.Load("UnitFormations", typeof(TextAsset));
 
 
-		string xmlText = System.IO.File.ReadAllText (Application.dataPath + "/UnitFormations.xml");
-		TinyXmlReader reader = new TinyXmlReader (xmlText);
+		TinyXmlReader reader = new TinyXmlReader (textAsset.text);
 		while (reader.Read()) {
 			if (reader.isOpeningTag) {
 				if(reader.tagName == "formation" && reader.isOpeningTag)
@@ -176,35 +183,41 @@ public class ObjectSpawner : MonoBehaviour
 
 		float random = Random.Range (-2, 2);
 		random *= 2;
-
-
-		if(Time.time > spawnTime)
+		if(Time.time < randomTime)
 		{
-			randomFormation = Random3Line (Random.Range (2, 5), Random.Range(1, 3));
-			for(int i = 0; i < randomFormation.positions.Length; i++)
+			if(Time.time > spawnTime)
 			{
-				GameObject clone = Instantiate(objects[(int)randomFormation.objectType[i]], new Vector3(12 + randomFormation.positions[i].x, randomFormation.positions[i].y, 0), Quaternion.identity) as GameObject;
-				clone.rigidbody2D.velocity = new Vector2(-6, 0);
+				randomFormation = Random3Line (Random.Range (2, 5), Random.Range(1, 3));
+				for(int i = 0; i < randomFormation.positions.Length; i++)
+				{
+					GameObject clone = Instantiate(objects[(int)randomFormation.objectType[i]], new Vector3(12 + randomFormation.positions[i].x, randomFormation.positions[i].y, 0), Quaternion.identity) as GameObject;
+					clone.rigidbody2D.velocity = new Vector2(-6, 0);
+				}
+
+				spawnTime = Time.time + randomFormation.spawnTime;
+
 			}
-
-			spawnTime = Time.time + randomFormation.spawnTime;
-
+		}else{
+			if (Time.time > spawnTime && currentCount < totalCount) {
+				for (int j = 0; j < objectFormations[formationNumber].positions.Length; j++) {
+					GameObject clone = Instantiate (objects [(int)objectFormations [formationNumber].objectType [j]], new Vector3 (12 + objectFormations [formationNumber].positions [j].x, objectFormations [formationNumber].positions [j].y, 0), Quaternion.identity) as GameObject;
+					clone.rigidbody2D.velocity = new Vector2 (-6, 0);
+				}
+					
+				spawnTime = Time.time + objectFormations[formationNumber].spawnTime;
+				formationNumber++;
+				formationNumber %= objectFormations.Count;
+				currentCount++;
+			}
 		}
 
-		/*
-		if (Time.time > spawnTime) {
-
-			for (int j = 0; j < objectFormations[formationNumber].positions.Length; j++) {
-				GameObject clone = Instantiate (objects [(int)objectFormations [formationNumber].objectType [j]], new Vector3 (12 + objectFormations [formationNumber].positions [j].x, objectFormations [formationNumber].positions [j].y, 0), Quaternion.identity) as GameObject;
-				clone.rigidbody2D.velocity = new Vector2 (-6, 0);
+		if(currentCount >= totalCount)
+		{
+			if(!GameStats.instance.GetBossMode())
+			{
+				SpawnBoss();
 			}
-
-		
-			spawnTime = Time.time + objectFormations[formationNumber].spawnTime;
-			formationNumber++;
-			formationNumber %= objectFormations.Count;
 		}
-		*/
 	}
 
 
@@ -224,7 +237,6 @@ public class ObjectSpawner : MonoBehaviour
 		for(int i = 0; i < items; i++)
 		{
 			int tempInt = Random.Range (1, 201);
-			Debug.Log (tempInt);
 			if(tempInt < 10 && !lockOut)
 			{
 				temp1.objectType[i] = ObjectType.EnemySimple;
@@ -239,5 +251,17 @@ public class ObjectSpawner : MonoBehaviour
 		}
 		temp1.spawnTime = spnTme;
 		return temp1;
+	}
+
+	void SpawnBoss()
+	{
+		GameStats.instance.SetBossMode (true);
+		StartCoroutine (BossSpawnTimer ());
+	}
+
+	IEnumerator BossSpawnTimer()
+	{
+		yield return new WaitForSeconds(5);
+		GameObject bossClose = Instantiate (boss01, new Vector3 (-12, 0), Quaternion.identity) as GameObject;
 	}
 }
