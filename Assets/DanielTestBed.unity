@@ -211,11 +211,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0c8e65699cbd0444d93faac39338f4fc, type: 2}
       propertyPath: speedModifier
-      value: .100000001
+      value: .200000003
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0c8e65699cbd0444d93faac39338f4fc, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0c8e65699cbd0444d93faac39338f4fc, type: 2}
       propertyPath: maxSpeed
@@ -430,7 +430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1074384379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e923e83af4e054e6496955777e42b146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedModifier: .100000001
+  speedModifier: .200000003
   scoreModifier: 100
   maxSpeed: 4
   shotCooldown: 2
@@ -619,7 +619,7 @@ MonoBehaviour:
   enemyMultiShot: {fileID: 100000, guid: 4a94944036c8645dbbe242f7469ab877, type: 2}
   boss01: {fileID: 100000, guid: d2d39a2d03eb14e0eab114536a7c5fa3, type: 2}
   fileName: {fileID: 4900000, guid: 520ae22c21a3a4dd3a6cbd72753026c3, type: 3}
-  randomTime: 0
+  randomTime: 30
 --- !u!114 &1108680949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedModifier: .300000012
   scoreModifier: 100
-  maxSpeed: 0
+  maxSpeed: 4
   shotCooldown: 2
   bullet: {fileID: 100000, guid: 2f2fdca4be7794a23a846e88c5ee43c9, type: 2}
 --- !u!58 &2105612128

@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedModifier: .300000012
   scoreModifier: 100
+  maxSpeed: 4
   shotCooldown: 2
   bullet: {fileID: 100000, guid: b1452f60f64d849df8479de23d694d2a, type: 2}
 --- !u!212 &21200000
