@@ -9,7 +9,7 @@ public class GameStats : MonoBehaviour
 		float currentSpeed = 6.0f;
 		private float screenWidth;
 		private float halfScreenWidth;
-		bool bossMode = true;
+		bool bossMode = false;
 
 		void Awake ()
 		{

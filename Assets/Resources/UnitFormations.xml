@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ANSI"?>
 <document>
 	<formation>
 		<size>8</size>
@@ -201,4 +201,4 @@
 			<y>-4</y>
 		</object>
 	</formation>
-	</document>
+</document>

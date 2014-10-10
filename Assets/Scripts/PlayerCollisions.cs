@@ -12,11 +12,22 @@ public class PlayerCollisions : MonoBehaviour {
 	
 	void OnTriggerEnter2D (Collider2D other)
 	{			
-			if (other.gameObject.tag == "HardRock") {
-				PlayerController.player.Collision();
-				UIManager.instance.SetScore(-25);
-				Debug.Log ("Hit");
-			}
+		if (other.gameObject.tag == "HardRock") {
+			PlayerController.player.Collision();
+			UIManager.instance.SetScore(-25);
+			Debug.Log ("Hit");
+		}
 
+		if (other.gameObject.tag == "Enemy") {
+			PlayerController.player.Collision();
+			UIManager.instance.SetScore(-25);
+			Debug.Log ("Hit");
+		}
+
+		if (other.gameObject.tag == "EnemyBullet") {
+			PlayerController.player.Collision();
+			UIManager.instance.SetScore(-25);
+			Debug.Log ("Hit");
+		}
 	}
 }
