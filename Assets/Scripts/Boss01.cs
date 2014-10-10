@@ -46,6 +46,7 @@ public class Boss01 : MonoBehaviour
 		{
 				if (healthCurrent < 0) {
 			Destroy(gameObject);
+			Application.LoadLevel ("Title");
 				}
 				switch (mode) {
 				case AttackMode.entering:
