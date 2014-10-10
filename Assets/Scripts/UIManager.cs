@@ -24,10 +24,6 @@ public class UIManager : MonoBehaviour {
 			instance = this;
 		
 		DontDestroyOnLoad(instance);
-		Debug.Log (Screen.height);
-		Debug.Log (defaultScreenHeight);
-		Debug.Log (defaultFontSize);
-		Debug.Log (Screen.height / defaultScreenHeight * defaultFontSize);
 		scoreText.fontSize = (int)(Screen.height / defaultScreenHeight * defaultFontSize);
 	}
 

@@ -32,15 +32,24 @@ public class EnemyMultiShot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.Lerp (transform.position, newPosition, 0.25f);
-		if(!fadeBack)
+		if(!GameStats.instance.GetBossMode())
 		{
-			if (currentTime + moveCooldown <= Time.time) {
-				LeaveBulletTrail ();
-				currentTime = Time.time;
+			transform.position = Vector3.Lerp (transform.position, newPosition, 0.25f);
+			if(!fadeBack)
+			{
+				if (currentTime + moveCooldown <= Time.time) {
+					LeaveBulletTrail ();
+					currentTime = Time.time;
+				}
+			}else{
+				FadeAway ();		
 			}
 		}else{
-			FadeAway ();		
+			rigidbody2D.velocity = new Vector2 (-20, 0);
+			foreach (GameObject bullet in bullets) {
+				bullet.GetComponent<Projectile>().speedModifier = 3;
+			}
+			bullets.Clear();
 		}
 	}
 
@@ -80,7 +89,6 @@ public class EnemyMultiShot : MonoBehaviour {
 
 	IEnumerator Fading()
 	{
-		Debug.Log ("Waiting...");
 		shipIsFading = true;
 		yield return new WaitForSeconds (timeBetweenShot);
 		fadeBack = false;
@@ -100,7 +108,7 @@ public class EnemyMultiShot : MonoBehaviour {
 		}else{
 			transform.position = new Vector3 (12, 4, 0);
 		}
-
+		Debug.Log ("FADE IN!");
 		yield return new WaitForSeconds (timeBetweenShot);
 
 	}

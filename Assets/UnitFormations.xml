@@ -208,10 +208,10 @@
 		<size>2</size>
 		<spawnTime>10</spawnTime>
 		<object>
-			<type>EnemyDirectShot</type>
+			<type>EnemyDirect</type>
 			<x>2</x>
 			<y>-2</y>
-			<type>EnemyDirectShot</type>
+			<type>EnemyDirect</type>
 			<x>2</x>
 			<y>2</y>
 		</object>
@@ -221,7 +221,16 @@
 		<spawnTime>10</spawnTime>
 		<object>
 			<type>EnemyLaneJumper</type>
-			<x>-4</x>
+			<x>2</x>
+			<y>0</y>
+		</object>
+	</formation>
+	<formation>
+		<size>1</size>
+		<spawnTime>10</spawnTime>
+		<object>
+			<type>EnemyLaneJumper</type>
+			<x>2</x>
 			<y>0</y>
 		</object>
 	</formation>
@@ -230,7 +239,7 @@
 		<spawnTime>10</spawnTime>
 		<object>
 			<type>EnemyMultiShot</type>
-			<x>-5</x>
+			<x>11</x>
 			<y>-4</y>
 		</object>
 	</formation>

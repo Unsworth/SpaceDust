@@ -52,7 +52,7 @@ public class ObjectSpawner : MonoBehaviour
 	public GameObject boss01;
 	public TextAsset fileName;
 	private int currentCount = 0;
-	private int totalCount = 5;
+	private int totalCount = 9;
 	int formationNumber = 0;
 	int formationSize = 0;
 	int formationCount = 0;
@@ -191,6 +191,7 @@ public class ObjectSpawner : MonoBehaviour
 				for(int i = 0; i < randomFormation.positions.Length; i++)
 				{
 					GameObject clone = Instantiate(objects[(int)randomFormation.objectType[i]], new Vector3(12 + randomFormation.positions[i].x, randomFormation.positions[i].y, 0), Quaternion.identity) as GameObject;
+					if((int)randomFormation.objectType[i] != 6)
 					clone.rigidbody2D.velocity = new Vector2(-6, 0);
 				}
 
@@ -201,7 +202,8 @@ public class ObjectSpawner : MonoBehaviour
 			if (Time.time > spawnTime && currentCount < totalCount) {
 				for (int j = 0; j < objectFormations[formationNumber].positions.Length; j++) {
 					GameObject clone = Instantiate (objects [(int)objectFormations [formationNumber].objectType [j]], new Vector3 (12 + objectFormations [formationNumber].positions [j].x, objectFormations [formationNumber].positions [j].y, 0), Quaternion.identity) as GameObject;
-					clone.rigidbody2D.velocity = new Vector2 (-6, 0);
+					//if((int)randomFormation.objectType[j] != 6)
+					//clone.rigidbody2D.velocity = new Vector2 (-6, 0);
 				}
 					
 				spawnTime = Time.time + objectFormations[formationNumber].spawnTime;
@@ -211,10 +213,14 @@ public class ObjectSpawner : MonoBehaviour
 			}
 		}
 
-		if(currentCount >= totalCount)
+		if(currentCount >= totalCount && Time.time > spawnTime)
 		{
 			if(!GameStats.instance.GetBossMode())
 			{
+				foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
+				{
+
+				}
 				SpawnBoss();
 			}
 		}

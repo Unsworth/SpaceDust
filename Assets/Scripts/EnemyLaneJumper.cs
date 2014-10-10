@@ -8,7 +8,7 @@ public class EnemyLaneJumper : Enemy
 	private float currentTime;
 	private GameObject player;
 	private Vector3 newPosition;
-	public float maxSpeed;
+	//public float maxSpeed;
 	// Use this for initialization
 	void Start ()
 	{

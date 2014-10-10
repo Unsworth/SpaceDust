@@ -221,7 +221,7 @@ MonoBehaviour:
   healthMax: 10
   healthCurrent: 10
   speed: 0
-  attackRate: 2
+  attackRate: 1
   attackTime: 0
   cannons:
   - {fileID: 100002}

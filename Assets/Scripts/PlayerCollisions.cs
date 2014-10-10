@@ -29,5 +29,11 @@ public class PlayerCollisions : MonoBehaviour {
 			UIManager.instance.SetScore(-25);
 			Debug.Log ("Hit");
 		}
+
+		if (other.gameObject.tag == "BreakableRock") {
+			PlayerController.player.Collision();
+			UIManager.instance.SetScore(-25);
+			Debug.Log ("Hit");
+		}
 	}
 }
